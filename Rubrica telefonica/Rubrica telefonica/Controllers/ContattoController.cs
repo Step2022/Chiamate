@@ -42,6 +42,12 @@ namespace Rubrica_telefonica.Controllers
             }
         }
 
+        
 
+
+        public IActionResult Aggiungi()
+        {
+            return View();
+        }
     }
 }
