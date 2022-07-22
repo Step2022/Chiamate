@@ -8,5 +8,11 @@ namespace Rubrica_telefonica.Controllers
         {
             return View();
         }
+
+
+        public IActionResult Aggiungi()
+        {
+            return View();
+        }
     }
 }
