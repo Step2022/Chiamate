@@ -44,15 +44,23 @@ namespace Rubrica_telefonica.DAO
             return _context.Contattos.Where(x => x.IdPropietario == idNumero).ToList();
         }
 
-       /* public bool EditContatto(int idContatto, int idPropietario)
+       public bool EditContatto(Contatto contatto)
         {
             try{
+            var c= GetContatto(contatto.IdContatto, contatto.IdPropietario);
+                c.Nome = contatto.Nome;
+                c.Cognome = contatto.Cognome;
+                c.Alias = contatto.Cognome;
+                c.Email = contatto.Email;
+                c.Img = contatto.Img;
+                _context.SaveChanges();
+                return true;
 
-            }catch ()
+            }catch (Exception ex)
             {
-
+                return false;
             }
-        }*/
+        }
       
         public bool RemoveContatto(int idContatto, int idPropietario)
         {
@@ -69,11 +77,11 @@ namespace Rubrica_telefonica.DAO
 
 
 
-        /*AddContatto(idNumero)
-GetContatto(idContatto)
-GetContatti(idNumero)
-ModificaContatto(idContatto)
-EliminaContatto(idContatto)*/
+           /*AddContatto(idNumero)
+            GetContatto(idContatto)
+            GetContatti(idNumero)
+            ModificaContatto(idContatto)
+            EliminaContatto(idContatto)*/
 
     }
 }
