@@ -1,0 +1,66 @@
+﻿@model List<Rubrica_telefonica.Database.Contatto>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Contatti";
+    string Numero = Accessor.HttpContext.Session.GetString("Numero");
+}
+@if(Numero==null){
+    // non loggato
+    <div id="alreadylogged">
+        <h1>Verrai reindirizzato al login</h1>
+    </div>
+    <script>
+        $("#alreadylogged").ready(function() {
+            setTimeout(window.location.href="@Url.Action("Index","Home")",3000)
+    
+        })
+    </script>
+}else{
+    <div class="container w-50 mx-auto" name="page_container">
+        <div class="row" >
+            <!-- Container dei pulsanti principali (da fixare)-->
+            <div class="col position-relative" name="barra_ricerca">
+                
+                <input type="text" class="position-absolute top-0 start-0 rounded-4 h-100 w-100" placeholder="Cerca:"/>
+                <button type="button" class="btn bg-transparent position-absolute end-0" id="search"><i class="bi bi-search"></i></button>
+            </div>
+            <div class="col" name="aggiungi_contatto">
+                <button type="button" class="btn btn-primary" id="addContatto"><i class="bi bi-person-plus-fill"></i></button>
+            </div>
+        </div>
+        @foreach(var contatto in Model)
+        {
+            <div class="row">
+                <div class="col" name="immagine">
+                    @if(contatto.Img!= null)
+                    {
+                        <img src ="@contatto.Img" title="immagine contatto">
+                    }
+                    else
+                    {
+                        <i class="bi bi-person"></i>
+                    }
+                </div>
+                <div class="col" name="nome">
+                    @if (contatto.Alias != null && contatto.Alias.Trim()!="")
+                    {
+                        <p>@contatto.Alias</p>
+                    }
+                    else
+                    {
+                        <p>@contatto.Cognome @contatto.Nome</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+$("#addContatto").click(function() {
+    window.location.href="@Url.Action("Aggiungi","Contatto")"
+})
+    </script>
+}

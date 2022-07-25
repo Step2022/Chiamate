@@ -1,5 +1,50 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Rubrica_telefonica.Database.Chiamatum
+@using Rubrica_telefonica.Database
 @{
+    ViewData["Title"] = "Chiamata";
+    var cont = ViewData["contatto"] as Contatto;
 }
+<style>
+    .chiamata{
+        width:auto;
+        min-width:fit-content;
+        max-width:100%;
+        height:auto;
+        min-height:fit-content;
+        max-height:100%;
+        text-align:center;
+    }
+    .termina{
+        background-color:red;
+    }
+</style>
+
+<div id="call" class="chiamata">
+    @if (cont != null)
+    {
+        <img src="@cont.Img" />
+    }
+    else
+    {
+        <i class="bi bi-person"></i>
+    }
+    <button id="end" class="termina">Termina</button>
+</div>
+<script>
+    $("end").click(function() {
+        $.ajax({
+            type: "post",
+            url: @Url.Action("End","Chiamata"),
+            data: {
+                idChiamata = @Model.IdChiamata
+                },
+            dataType: "text",
+            success: function(data) {
+                window.location.href = "@Url.Action("Contatti","Home")"
+            }, error(req, status, error) {
+                console.log(error);
+                alert("Cannot contact databse");
+            }
+        })
+    });
+</script>

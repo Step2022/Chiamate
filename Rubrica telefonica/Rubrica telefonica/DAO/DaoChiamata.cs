@@ -5,14 +5,14 @@ namespace Rubrica_telefonica.DAO
     public class DaoChiamata
     {
         private readonly CorsoRoma2022Context _context;
-        private readonly DaoNumero daoNum;
 
         public DaoChiamata(CorsoRoma2022Context context)
         {
             _context = context;
         }
-        public int StartChiamata(int idChiamante, string numeroRicevente)
+        public Chiamatum StartChiamata(int idChiamante, string numeroRicevente)
         {
+            DaoNumero daoNum = new DaoNumero(new CorsoRoma2022Context());
             int idRicevente = daoNum.GetNumeroDaNumeroTelefono(numeroRicevente).IdNumero;
             Chiamatum chiam = new Chiamatum();
             chiam.IdChiamante = idChiamante;
@@ -20,21 +20,14 @@ namespace Rubrica_telefonica.DAO
             chiam.InizioChiamata = DateTime.Now;
             _context.Chiamata.Add(chiam);
             _context.SaveChanges();
-            return chiam.IdChiamata;
+            return chiam;
         }
-        public bool EndChiamata(int idChiamata)
+        public Chiamatum EndChiamata(int idChiamata)
         {
-            try
-            {
-                Chiamatum chia = _context.Chiamata.First(i => i.IdChiamata == idChiamata);
-                chia.FineChiamata = DateTime.Now;
-                _context.SaveChanges();
-                return true;
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return false;
-            }
+            Chiamatum chia = _context.Chiamata.First(i => i.IdChiamata == idChiamata);
+            chia.FineChiamata = DateTime.Now;
+            _context.SaveChanges();
+            return chia;
         }
 
         public TimeSpan? GetDurata(Chiamatum chiamata)
