@@ -10,7 +10,26 @@ namespace Rubrica_telefonica.DAO
         {
             _context = context;
         }
+        public Chiamatum StartChiamata(int idChiamante, string numeroRicevente)
+        {
 
+            DaoNumero daoNum = new DaoNumero(new CorsoRoma2022Context());
+            int idRicevente = daoNum.GetNumeroDaNumeroTelefono(numeroRicevente).IdNumero;
+            Chiamatum chiam = new Chiamatum();
+            chiam.IdChiamante = idChiamante;
+            chiam.IdRicevente = idRicevente;
+            chiam.InizioChiamata = DateTime.Now;
+            _context.Chiamata.Add(chiam);
+            _context.SaveChanges();
+            return chiam;
+        }
+        public Chiamatum EndChiamata(int idChiamata)
+        {
+            Chiamatum chia = _context.Chiamata.First(i => i.IdChiamata == idChiamata);
+            chia.FineChiamata = DateTime.Now;
+            _context.SaveChanges();
+            return chia;
+        }
 
         public static TimeSpan? GetDurata(Chiamatum chiamata)
         {
@@ -20,8 +39,8 @@ namespace Rubrica_telefonica.DAO
             return Durata;
 
         }
-
-
+        
+ 
 
         public static TimeSpan? ChiamataMax(int idNumero)
         {
@@ -42,7 +61,7 @@ namespace Rubrica_telefonica.DAO
 
                 a.Add(DaoChiamata.GetDurata(i));
 
-            };
+            }
 
             var massimo = a.Max();
 
@@ -70,51 +89,11 @@ namespace Rubrica_telefonica.DAO
 
                 a.Add(DaoChiamata.GetDurata(i));
 
-            };
+            }
 
             var minimo = a.Min();
 
             return minimo;
         }
-
-
-        public static int CountChiamate(int idChiamante, int idRicevente)
-        {
-            List<Chiamatum> Chiamate = new List<Chiamatum>();
-            using (CorsoRoma2022Context context = new CorsoRoma2022Context())
-            {
-                Chiamate = (from Chiamata in context.Chiamata
-                                  where Chiamata.IdChiamante == idChiamante & Chiamata.IdRicevente == idRicevente ||
-                                  Chiamata.IdRicevente == idChiamante & Chiamata.IdChiamante == idRicevente
-                                  select Chiamata).ToList();
-
-            }
-
-           int NumeroChiamate = Chiamate.Count();
-
-            return NumeroChiamate;
-        }
-
-
-        public static int GetChiamateTotali(int idNumero)
-        {
-            List<Chiamatum> Chiamate = new List<Chiamatum>();
-            using (CorsoRoma2022Context context = new CorsoRoma2022Context())
-            {
-                Chiamate = (from Chiamata in context.Chiamata
-                            where Chiamata.IdChiamante == idNumero || Chiamata.IdRicevente == idNumero
-                            select Chiamata).ToList();
-
-            }
-
-            int NumeroChiamateTotali = Chiamate.Count();
-
-            return NumeroChiamateTotali;
-        }
-
-
-
     }
-}
-
-
+        }
