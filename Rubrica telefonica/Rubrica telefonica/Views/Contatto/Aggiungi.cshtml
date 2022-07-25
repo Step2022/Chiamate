@@ -1,4 +1,5 @@
-﻿
+﻿@using static Rubrica_telefonica.Database.Contatto
+
 <style>
 
         body {
@@ -92,27 +93,27 @@
 
     <div>
   <div class="contact-form-wrapper d-flex justify-content-center">
-    <form action="#" class="contact-form">
+    <form action="Aggiungi" class="contact-form" method="post">
       <h5 class="title">Contact us</h5>
       <p class="description">Feel free to contact us if you need any assistance, any help or another question.
       </p>
       <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" id="nome" placeholder="Nome" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome" required>
       </div>
        <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" id="cognome" placeholder="Cognome" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cognome" placeholder="Cognome" required>
       </div>
              <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" id="alias" placeholder="Alias" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Alias" placeholder="Alias" required>
       </div>
        <div>
-        <input type="number" class="form-control rounded border-white mb-3 form-input" id="cellulare" placeholder="Cellulare" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cellulare" placeholder="Cellulare" required>
       </div>
        <div>
-        <input type="number" class="form-control rounded border-white mb-3 form-input" id="fisso" placeholder="Fisso" required>
+        <input type="number" class="form-control rounded border-white mb-3 form-input" name="Fisso" placeholder="Fisso" >
       </div>
             <div>
-        <input type="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email" required>
+        <input type="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email" name="Email" required>
       </div>
       <div class="submit-button-wrapper">
         <input type="submit" value="Salva">

@@ -13,8 +13,10 @@ namespace Rubrica_telefonica.Controllers
         }
 
        DaoContatto d = new DaoContatto(new CorsoRoma2022Context());
+        DaoNumero dNumero = new DaoNumero(new CorsoRoma2022Context());
 
-        [HttpGet]
+
+       [HttpGet]
         public IActionResult Edit()
         {
             return View();
@@ -31,8 +33,8 @@ namespace Rubrica_telefonica.Controllers
         {
             if (HttpContext.Session != null)
             {
-                // HttpContext.Session.SetString("Numero", Serializzazione.Serialize(utente));
-                var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Numero"));
+                // HttpContext.Session.SetString("Numero", Serializzazione.Serialize(numero));
+                var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Utente"));
                 d.GetContatti(numero.IdNumero);
                 return View();
             }
@@ -42,12 +44,24 @@ namespace Rubrica_telefonica.Controllers
             }
         }
 
-        
 
 
+        [HttpGet]
         public IActionResult Aggiungi()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Aggiungi(Contatto contatto, string Cellulare)
+        {
+
+            //    var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Utente"));
+            //    contatto.IdPropietario = numero.IdNumero;
+
+            var numero=    dNumero.CheckNumero(Cellulare);
+            contatto.IdCellulare = numero.IdNumero;
+            ViewBag.Succes = "Errore nell'aggiuta del contatto";
+          return  d.AddContatto(contatto) ?  View("Contatti"):View("Aggiungi");
         }
     }
 }

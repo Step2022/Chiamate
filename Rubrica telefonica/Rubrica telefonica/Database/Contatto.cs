@@ -15,6 +15,7 @@ namespace Rubrica_telefonica.Database
         public string? Img { get; set; }
         public int IdPropietario { get; set; }
 
+
         public virtual Numero? IdPropietarioNavigation { get; set; }
     }
 }
