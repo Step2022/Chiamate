@@ -1,4 +1,5 @@
-﻿@using static Rubrica_telefonica.Database.Contatto
+﻿
+@using static Rubrica_telefonica.Database.Contatto
 
 <style>
 
@@ -96,11 +97,11 @@
 
     <form action="Aggiungi" class="contact-form" method="post">
 
-      <h5 class="title">Aggiungi contatto</h5>
+      <h5 class="title">Modifica contatto</h5>
       <p class="description">Inserire qui i dati del nuovo contatto
       </p>
       <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome"  value="" required>
       </div>
        <div>
         <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cognome" placeholder="Cognome" required>
