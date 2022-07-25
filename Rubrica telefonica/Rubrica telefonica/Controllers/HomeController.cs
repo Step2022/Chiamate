@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rubrica_telefonica.DAO;
-using Rubrica_telefonica.Database;
 using Rubrica_telefonica.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -10,9 +8,6 @@ namespace Rubrica_telefonica.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        DaoContatto daoContatto = new DaoContatto(new CorsoRoma2022Context());
-        DaoChiamata daoChiamata = new DaoChiamata(new CorsoRoma2022Context());
 
         public HomeController(ILogger<HomeController> logger)
         {
