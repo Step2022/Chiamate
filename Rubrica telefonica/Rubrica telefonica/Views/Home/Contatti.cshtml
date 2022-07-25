@@ -6,9 +6,13 @@
 *@
 @{
     ViewData["Title"] = "Contatti";
-    string Numero = Accessor.HttpContext.Session.GetString("Numero");
+    string jsonNumero = Accessor.HttpContext.Session.GetString("Numero");
+    Numero num;
+    if(jsonNumero!=null){
+        num = Serializzazione.DeSerialize<Numero>(jsonNumero);
+    }
 }
-@if(Numero==null){
+@if(jsonNumero==null){
     // non loggato
     <div id="alreadylogged">
         <h1>Verrai reindirizzato al login</h1>
@@ -20,22 +24,23 @@
         })
     </script>
 }else{
+    
     <div class="container w-50 mx-auto" name="page_container">
         <div class="row" >
             <!-- Container dei pulsanti principali (da fixare)-->
-            <div class="col-lg-11 position-relative" name="barra_ricerca">
+            <div class="col-lg-10 position-relative" name="barra_ricerca">
                 
                 <input type="text" class="position-absolute top-0 start-0 rounded-4 h-100 w-100" placeholder="Cerca:"/>
                 <button type="button" class="btn bg-transparent position-absolute end-0" id="search"><i class="bi bi-search"></i></button>
             </div>
-            <div class="col-lg-1" name="aggiungi_contatto">
-                <button type="button" class="btn btn-primary" id="addContatto"><i class="bi bi-person-plus-fill"></i></button>
+            <div class="col-lg-2" name="aggiungi_contatto">
+                <button type="button" class="btn btn-primary rounded-circle" id="addContatto"><i class="bi bi-person-plus-fill"></i></button>
             </div>
         </div>
         <hr />
         @foreach(var contatto in Model)
         {
-            <div class="row">
+            <div class="row" onclick="chiama("@num.IdNumero","")">
                 <div class="col-sm-1" name="immagine">
                     @if(contatto.Img!= null)
                     {
