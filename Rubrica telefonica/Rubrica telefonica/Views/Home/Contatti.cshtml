@@ -23,19 +23,20 @@
     <div class="container w-50 mx-auto" name="page_container">
         <div class="row" >
             <!-- Container dei pulsanti principali (da fixare)-->
-            <div class="col position-relative" name="barra_ricerca">
+            <div class="col-lg-11 position-relative" name="barra_ricerca">
                 
                 <input type="text" class="position-absolute top-0 start-0 rounded-4 h-100 w-100" placeholder="Cerca:"/>
                 <button type="button" class="btn bg-transparent position-absolute end-0" id="search"><i class="bi bi-search"></i></button>
             </div>
-            <div class="col" name="aggiungi_contatto">
+            <div class="col-lg-1" name="aggiungi_contatto">
                 <button type="button" class="btn btn-primary" id="addContatto"><i class="bi bi-person-plus-fill"></i></button>
             </div>
         </div>
+        <hr />
         @foreach(var contatto in Model)
         {
             <div class="row">
-                <div class="col" name="immagine">
+                <div class="col-sm-1" name="immagine">
                     @if(contatto.Img!= null)
                     {
                         <img src ="@contatto.Img" title="immagine contatto">
@@ -45,7 +46,7 @@
                         <i class="bi bi-person"></i>
                     }
                 </div>
-                <div class="col" name="nome">
+                <div class="col-lg-11" name="nome">
                     @if (contatto.Alias != null && contatto.Alias.Trim()!="")
                     {
                         <p>@contatto.Alias</p>
