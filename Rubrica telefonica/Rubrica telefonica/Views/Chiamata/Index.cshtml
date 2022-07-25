@@ -64,6 +64,7 @@
             ore = `0${ore}`;
         }
         secondi++;
+        $("timer").innerHTML = ore + ":" + minuti + ":" + secondi
         if(secondi == 59){
             minuti++;
             secondi = 0;
@@ -73,6 +74,5 @@
             minuti = 0;
             secondi = 0;
         }
-        $("timer").innerHTML = ore + ":" + minuti + ":" + secondi
     }, 1000);
 </script>
