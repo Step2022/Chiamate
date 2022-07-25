@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "Contatti";
     string jsonNumero = Accessor.HttpContext.Session.GetString("Numero");
-    Numero num;
+    Numero num = null;
     if(jsonNumero!=null){
         num = Serializzazione.DeSerialize<Numero>(jsonNumero);
     }

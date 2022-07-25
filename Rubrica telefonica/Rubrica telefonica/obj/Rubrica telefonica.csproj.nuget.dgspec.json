@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Source\\Repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj": {}
+    "C:\\Users\\user\\source\\repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Source\\Repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj": {
+    "C:\\Users\\user\\source\\repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj",
+        "projectUniqueName": "C:\\Users\\user\\source\\repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj",
         "projectName": "Rubrica telefonica",
-        "projectPath": "C:\\Users\\user\\Source\\Repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj",
+        "projectPath": "C:\\Users\\user\\source\\repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\Rubrica telefonica.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Source\\Repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\obj\\",
+        "outputPath": "C:\\Users\\user\\source\\repos\\Chiamate\\Rubrica telefonica\\Rubrica telefonica\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.7, )"
@@ -52,11 +56,19 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.7, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
