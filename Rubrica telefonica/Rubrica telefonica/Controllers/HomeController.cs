@@ -31,9 +31,11 @@ namespace Rubrica_telefonica.Controllers
         }
         public IActionResult Contatti()
         {
-            if (HttpContext.Session.GetString("Numero") != null)
+            var Numero = HttpContext.Session.GetString("Numero");
+            if (Numero != null)
             {
-                Numero num = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Numero"));
+                Numero num = Serializzazione.DeSerialize<Numero>(Numero);
+                
                 return View(daoCont.GetContatti(num.IdNumero));
             }
             else
