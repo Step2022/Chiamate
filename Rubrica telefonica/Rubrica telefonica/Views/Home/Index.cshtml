@@ -22,30 +22,34 @@ $("#alreadylogged").ready(function() {
     </script>
 }else{
     //non loggato
-    <div class="container  w-50 h-50 min-vh-100 my-auto mx-auto" name="page_container">
-        <div class="row w-25 text-center">
+    <div class="container  w-25 h-250 my-auto mx-auto" name="page_container">
+        <div class="row w-100 text-center">
             <input type="text" id="numeroDiTelefono" class="text-danger " placeholder="Telefono:" />
         </div>
-         <div class="row pt-3 text-center  w-25">
-            <button id="Login" class="btn btn-primary">Login</button>
+         <div class="row pt-3 mx-auto  w-50 ">
+             
+            <button id="Login" class="btn btn-primary col-lg-12 w-75">Login</button>
+             
         </div>
     </div>
     <script>
         $("#Login").click(function() {
-            $.ajax({
-                type:"post",
-                url:"@Url.Action("Login","Home")",
-                data: {
-                    NumeroTelefono: $("#numeroDiTelefono").val()
-                },
-                dataType:"json",
-                success:function(data){
-                    window.location.href="@Url.Action("Contatti","Home")"
-                }, error(req, status, error) {
-                    console.log(error);
-                    alert("Cannot contact databse");
-                }
-            })
+            if ($("#numeroDiTelefono").val() != null && $("#numeroDiTelefono").val().trim() != "") { 
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("Login","Home")",
+                    data: {
+                        NumeroTelefono: $("#numeroDiTelefono").val()
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        window.location.href = "@Url.Action("Contatti","Home")"
+                    }, error(req, status, error) {
+                        console.log(error);
+                        alert("Cannot contact databse");
+                    }
+                })
+            }
         });
     </script>
 }

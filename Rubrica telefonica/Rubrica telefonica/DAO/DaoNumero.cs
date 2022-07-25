@@ -40,10 +40,11 @@ namespace Rubrica_telefonica.DAO
         //SELECT NumeroTelefono FROM dbo.Numero WHERE IdNumero = 1
         public string GetNumero(int idNumero) {
 
-            var numeroDiTelefono = (from singoloNum in _context.Numeros
-                                    where singoloNum.IdNumero == idNumero
-                                    select singoloNum.NumeroTelefono).First();
-            return numeroDiTelefono;
+            var numeroDiTelefono = _context.Numeros.FirstOrDefault(x=>x.IdNumero==idNumero);
+                //(from singoloNum in _context.Numeros
+                //                    where singoloNum.IdNumero == idNumero
+                //                    select singoloNum.NumeroTelefono).First();
+            return numeroDiTelefono!=null?numeroDiTelefono.NumeroTelefono: null;
         }
 
         public Numero GetNumeroDaNumeroTelefono(string numeroDiTelefono)
@@ -64,9 +65,10 @@ namespace Rubrica_telefonica.DAO
          */
         public Numero CheckNumero(string numeroDiTelefono)
         {
-            var esiste = from singoloNum in _context.Numeros
-                         where singoloNum.NumeroTelefono == numeroDiTelefono
-                         select singoloNum;
+            var esiste = _context.Numeros.FirstOrDefault(x=>x.NumeroTelefono==numeroDiTelefono);
+            //var esiste = from singoloNum in _context.Numeros
+            //             where singoloNum.NumeroTelefono == numeroDiTelefono
+            //             select singoloNum;
             if (esiste == null)
             {
                 return AddNumero(numeroDiTelefono);
