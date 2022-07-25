@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rubrica_telefonica.DAO;
-using Rubrica_telefonica.Database;
 using Rubrica_telefonica.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Rubrica_telefonica.DAO;
+using Rubrica_telefonica.Database;
+using Rubrica_telefonica.Utility;
 
 namespace Rubrica_telefonica.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        DaoContatto daoContatto = new DaoContatto(new CorsoRoma2022Context());
-        DaoChiamata daoChiamata = new DaoChiamata(new CorsoRoma2022Context());
-
+        DaoNumero daoNum = new DaoNumero(new CorsoRoma2022Context());
+        DaoContatto daoCont = new DaoContatto(new CorsoRoma2022Context());
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -21,6 +21,28 @@ namespace Rubrica_telefonica.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public string Login(string numerotelefono)
+        {
+            var num = Serializzazione.Serialize(daoNum.CheckNumero(numerotelefono));
+            HttpContext.Session.SetString("Numero",num);
+            return num;
+        }
+        public IActionResult Contatti()
+        {
+            var Numero = HttpContext.Session.GetString("Numero");
+            if (Numero != null)
+            {
+                Numero num = Serializzazione.DeSerialize<Numero>(Numero);
+                
+                return View(daoCont.GetContatti(num.IdNumero));
+            }
+            else
+            {
+                return View();
+            }
+            
         }
 
         public IActionResult Privacy()

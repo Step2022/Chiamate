@@ -12,7 +12,6 @@ namespace Rubrica_telefonica.DAO
         }
         public Chiamatum StartChiamata(int idChiamante, string numeroRicevente)
         {
-
             DaoNumero daoNum = new DaoNumero(new CorsoRoma2022Context());
             int idRicevente = daoNum.GetNumeroDaNumeroTelefono(numeroRicevente).IdNumero;
             Chiamatum chiam = new Chiamatum();
@@ -31,7 +30,7 @@ namespace Rubrica_telefonica.DAO
             return chia;
         }
 
-        public static TimeSpan? GetDurata(Chiamatum chiamata)
+        public TimeSpan? GetDurata(Chiamatum chiamata)
         {
             TimeSpan? Durata;
 
@@ -39,61 +38,5 @@ namespace Rubrica_telefonica.DAO
             return Durata;
 
         }
-        
- 
-
-        public static TimeSpan? ChiamataMax(int idNumero)
-        {
-            List<Chiamatum> chiamata = new List<Chiamatum>();
-            using (CorsoRoma2022Context context = new CorsoRoma2022Context())
-            {
-                chiamata = (from Chiamata in context.Chiamata
-                            where Chiamata.IdChiamante == idNumero || Chiamata.IdRicevente == idNumero
-                            select Chiamata).ToList();
-
-
-
-            }
-            List<TimeSpan?> a = new List<TimeSpan?>();
-
-            foreach (var i in chiamata)
-            {
-
-                a.Add(DaoChiamata.GetDurata(i));
-
-            }
-
-            var massimo = a.Max();
-
-            return massimo;
-        }
-
-
-
-        public static TimeSpan? ChiamataMin(int idNumero)
-        {
-            List<Chiamatum> chiamata = new List<Chiamatum>();
-            using (CorsoRoma2022Context context = new CorsoRoma2022Context())
-            {
-                chiamata = (from Chiamata in context.Chiamata
-                            where Chiamata.IdChiamante == idNumero || Chiamata.IdRicevente == idNumero
-                            select Chiamata).ToList();
-
-
-
-            }
-            List<TimeSpan?> a = new List<TimeSpan?>();
-
-            foreach (var i in chiamata)
-            {
-
-                a.Add(DaoChiamata.GetDurata(i));
-
-            }
-
-            var minimo = a.Min();
-
-            return minimo;
-        }
     }
-        }
+}

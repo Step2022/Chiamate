@@ -1,8 +1,55 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "Login";
+    string idNumero = Accessor.HttpContext.Session.GetString("Numero");
+    
+        
+    
+    
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if(idNumero!=null){
+    //già loggato
+    <div id="alreadylogged">
+        <h1>Verrai reindirizzato alla rubrica</h1>
+    </div>
+    <script>
+        $("#alreadylogged").ready(function() {
+            setTimeout(window.location.href="@Url.Action("Contatti","Home")",3000)
+    
+        })
+    </script>
+}else{
+    //non loggato
+    <div class="container  w-25 h-250 my-auto mx-auto" name="page_container">
+        <div class="row w-100 text-center">
+            <input type="text" id="numeroDiTelefono" class=" " placeholder="Telefono:" />
+        </div>
+         <div class="row pt-3 mx-auto  w-50 ">
+             
+            <button id="Login" class="btn btn-primary col-lg-12 w-75">Login</button>
+             
+        </div>
+    </div>
+    <script>
+        $("#Login").click(function() {
+            if ($("#numeroDiTelefono").val() != null && $("#numeroDiTelefono").val().trim() != "") { 
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("Login","Home")",
+                    data: {
+                        NumeroTelefono: $("#numeroDiTelefono").val()
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        window.location.href = "@Url.Action("Contatti","Home")"
+                    }, error(req, status, error) {
+                        console.log(error);
+                        alert("Cannot contact databse");
+                    }
+                })
+            }
+        });
+    </script>
+}
