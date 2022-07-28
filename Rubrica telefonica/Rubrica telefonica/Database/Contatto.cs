@@ -8,7 +8,7 @@ namespace Rubrica_telefonica.Database
         public int IdContatto { get; set; }
         public string Nome { get; set; } = null!;
         public string Cognome { get; set; } = null!;
-        public decimal IdCellulare { get; set; }
+        public int IdCellulare { get; set; }
         public decimal? IdTelefonoFisso { get; set; }
         public string? Email { get; set; }
         public string? Alias { get; set; }

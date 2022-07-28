@@ -1,5 +1,5 @@
 ﻿
-@using static Rubrica_telefonica.Database.Contatto
+@model Rubrica_telefonica.Database.Contatto
 
 <style>
 
@@ -95,34 +95,41 @@
     <div>
   <div class="contact-form-wrapper d-flex justify-content-center">
 
-    <form action="Aggiungi" class="contact-form" method="post">
+    <form action="Edit" class="contact-form" method="post">
 
       <h5 class="title">Modifica contatto</h5>
       <p class="description">Inserire qui i dati del nuovo contatto
       </p>
       <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome"  value="" required>
+        <input type="hidden" class="form-control rounded border-white mb-3 form-input" name="IdContatto"   value="@Model.IdContatto" required>
+        <input type="hidden" class="form-control rounded border-white mb-3 form-input" name="IdCellulare"   value="@Model.IdCellulare" required>
+        <input type="hidden" class="form-control rounded border-white mb-3 form-input" name="IdPropietario"   value="@Model.IdPropietario" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome"  value="@Model.Nome" required>
       </div>
        <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cognome" placeholder="Cognome" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cognome" placeholder="Cognome" value="@Model.Cognome" required>
       </div>
              <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Alias" placeholder="Alias" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Alias" placeholder="Alias" value="@Model.Alias" required>
       </div>
        <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cellulare" placeholder="Cellulare"  maxlength="10" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cellulare" placeholder="Cellulare"   maxlength="10" required>
       </div>
        <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Fisso" placeholder="Fisso" maxlength="10" >
+        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Fisso" placeholder="Fisso"  maxlength="10" >
       </div>
             <div>
-        <input type="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email" name="Email" required>
+        <input type="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email" name="Email" value="@Model.Email" required>
 
       </div>
        
       <div class="submit-button-wrapper">
-        <input type="submit" value="Salva">
+        <input type="submit" value="Edit">
       </div>
     </form>
   </div>
 </div>
+
+
+
+

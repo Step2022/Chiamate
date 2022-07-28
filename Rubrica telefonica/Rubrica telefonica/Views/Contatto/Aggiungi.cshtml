@@ -94,13 +94,13 @@
     <div>
   <div class="contact-form-wrapper d-flex justify-content-center">
 
-    <form action="Aggiungi" class="contact-form" method="post">
+    <form action="Aggiungi" class="contact-form" method="post" id="addForm" name="addForm">
 
       <h5 class="title">Aggiungi contatto</h5>
       <p class="description">Inserire qui i dati del nuovo contatto
       </p>
       <div>
-        <input type="text" class="form-control rounded border-white mb-3 form-input" name="Nome" placeholder="Nome" required>
+        <input type="text" class="form-control rounded border-white mb-3 form-input"  name="Nome" id="Nome" placeholder="Nome" >
       </div>
        <div>
         <input type="text" class="form-control rounded border-white mb-3 form-input" name="Cognome" placeholder="Cognome" required>
@@ -120,8 +120,26 @@
       </div>
        
       <div class="submit-button-wrapper">
-        <input type="submit" value="Salva">
+        <input type="submit" value="Salva" id="Crea">
       </div>
     </form>
   </div>
 </div>
+
+ <script>
+    $(document).ready(function() {
+    
+    $("#addForm").validate({
+        rules: {
+            Nome: "required"
+        },
+        messages: {
+            Nome: "metti il nome ooooooo"
+
+        }
+    })
+
+});
+
+
+ </script>

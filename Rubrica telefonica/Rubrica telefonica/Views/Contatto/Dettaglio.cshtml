@@ -1,0 +1,12 @@
+﻿@model Rubrica_telefonica.Database.Contatto
+
+
+
+    <label>@Model.Nome</label>
+    <label>@Model.Cognome</label>
+    <label>@Model.Alias</label>
+    <label>@Model.Email</label>
+    <label>@Model.Img</label>
+    <label>@Model.NumeroTelefono</label>
+@Html.ActionLink("Modifica","Edit","Contatto",new {IdContatto=@Model.IdContatto})
+@Html.ActionLink("Elimina","Remove","Contatto",new {IdContatto=@Model.IdContatto})

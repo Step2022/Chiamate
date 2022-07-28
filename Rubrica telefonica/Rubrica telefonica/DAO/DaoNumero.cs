@@ -78,5 +78,16 @@ namespace Rubrica_telefonica.DAO
                 return GetNumeroDaNumeroTelefono(numeroDiTelefono);
             }  
         }
+        //alessandro
+        public void RemoveNumero(int idnumero)
+        {
+            var numero = _context.Numeros.FirstOrDefault(x => x.IdNumero == idnumero);
+            if (numero != null)
+            {
+                _context.Numeros.Remove(numero);
+                _context.SaveChanges();
+
+            }
+        }
     }
 }

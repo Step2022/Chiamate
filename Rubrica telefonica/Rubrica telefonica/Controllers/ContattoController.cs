@@ -17,15 +17,17 @@ namespace Rubrica_telefonica.Controllers
 
 
        [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int IdContatto)
         {
-            return View();
+            var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Numero"));
+           var contatto= d.GetContatto(IdContatto, numero.IdNumero);
+            return View(contatto);
         }
         [HttpPost]
-        public IActionResult Edit(Contatto contatto)
+        public IActionResult Edit(Contatto contatto, string Cellulare)
         {
             ViewBag.Errore = "Errore nella modifica del contatto";
-            return  d.EditContatto(contatto) ? View("Contatti","Home") : View("Edit");
+            return  d.EditContatto(contatto, Cellulare) ? RedirectToAction("Contatti","Home") : View("Edit");
 
         }
         /*  fatta matteo uguale nell index
@@ -63,7 +65,7 @@ namespace Rubrica_telefonica.Controllers
                 var cellulare = dNumero.CheckNumero(Cellulare);
                 contatto.IdCellulare = cellulare.IdNumero;
                 ViewBag.Succes = "Errore nell'aggiuta del contatto";
-                return d.AddContatto(contatto) ? View("Contatti", "Home") : View("Aggiungi");
+                return d.AddContatto(contatto) ? RedirectToAction("Contatti", "Home") : View("Aggiungi");
             }
             else
             {
@@ -76,6 +78,13 @@ namespace Rubrica_telefonica.Controllers
             var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Numero"));
             d.RemoveContatto(idContatto, numero.IdNumero);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Dettaglio(int IdContatto)
+        {
+            var numero = Serializzazione.DeSerialize<Numero>(HttpContext.Session.GetString("Numero"));
+
+            return d.GetContattoInclude(IdContatto, numero.IdNumero) != null ? View(d.GetContattoInclude(IdContatto, numero.IdNumero)) : RedirectToAction("Contatti", "Home");
         }
     }
 }
